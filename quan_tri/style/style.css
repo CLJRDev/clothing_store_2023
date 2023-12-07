@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+#header{
+  height: 60px;  
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+#header #logo{
+  width: 100px;
+  height: 50px;
+  cursor: pointer;
+}
+#header .user_img{
+  object-fit: cover;
+  width: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+#header .notification_icon{
+  cursor: pointer;
+  color: #3f6ad8;
+}
+.sidebar{
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+}
+.sidebar a,
+.body .form .title,
+.primary_color,
+.body .table_container .title{
+  color: #3f6ad8;
+}
+.body{
+  margin-left: 310px;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+.body .form{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.body .table_container{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.body .table_container .button_add{
+  background-color: #3f6ad8;
+  border: none;
+  transition: 0.25s;
+}
+.body .table_container .button_add:hover{
+  transform: scale(0.9);
+}
