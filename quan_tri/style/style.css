@@ -7,6 +7,12 @@
 #header{
   height: 60px;  
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  background-color: #3f6ad8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 #header #logo{
   width: 100px;
@@ -21,7 +27,6 @@
 }
 #header .notification_icon{
   cursor: pointer;
-  color: #3f6ad8;
 }
 .sidebar{
   position: fixed;
@@ -30,6 +35,13 @@
   bottom: 0;
   width: 280px;
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+.sidebar div{
+  cursor: pointer;
+}
+.sidebar div:hover{
+  opacity: 0.5;
 }
 .sidebar a,
 .body .form .title,
@@ -37,10 +49,15 @@
 .body .table_container .title{
   color: #3f6ad8;
 }
+.sidebar .menu_button{
+  transform: scale(1.5);
+  color: #3f6ad8;
+}
 .body{
   margin-left: 310px;
-  margin-top: 30px;
+  margin-top: 90px;
   margin-right: 30px;
+  transition: 0.5s;
 }
 .body .form{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -48,11 +65,18 @@
 .body .table_container{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.body .table_container .button_add{
+.body .table_container .button_add,
+.button_edit{
   background-color: #3f6ad8;
   border: none;
   transition: 0.25s;
 }
-.body .table_container .button_add:hover{
+.body .table_container .button_add:hover,
+.button_edit:hover{
   transform: scale(0.9);
+}
+.body .img_edit{
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
 }

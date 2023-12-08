@@ -2,7 +2,7 @@
   include '../module/database.php';
   include '../module/thong_bao.php';
   $ten_loai_san_pham = $_POST['ten_loai_san_pham'];
-
+  
   $dem = execute_query("SELECT COUNT(*) FROM loaisanpham WHERE TenLoaiSanPham=:ten_loai_san_pham", array('ten_loai_san_pham' => $ten_loai_san_pham))[0][0];
   if($dem > 0){
     alert('Loại sản phẩm đã tồn tại');
