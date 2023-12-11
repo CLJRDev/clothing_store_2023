@@ -9,13 +9,13 @@
     <a href="#"><i class='bx bx-user fs-4'></i></a>
   </div>
   <div class='d-flex align-items-center justify-content-between px-3 py-1'>
-    <a href="#" class='d-flex text-decoration-none align-items-center fs-6'>
+    <a href="../san_pham/quan_ly_san_pham.php" class='d-flex text-decoration-none align-items-center fs-6'>
       Sản Phẩm
     </a>
     <a href="#"><i class='bx bx-notepad fs-4'></i></a>
   </div>
   <div class='d-flex align-items-center justify-content-between px-3 py-1'>
-    <a href="#" class='d-flex text-decoration-none align-items-center fs-6'>
+    <a href="../kich_thuoc/them_kich_thuoc.php" class='d-flex text-decoration-none align-items-center fs-6'>
       Kích Thước
     </a>
     <a href="#"><i class='bx bx-font-size fs-4'></i></a>
@@ -27,7 +27,7 @@
     <a href="#"><i class='bx bx-category fs-4'></i></a>
   </div>
   <div class='d-flex align-items-center justify-content-between px-3 py-1'>
-    <a href="#" class='d-flex text-decoration-none align-items-center fs-6'>
+    <a href="../hang_san_xuat/them_hang_san_xuat.php" class='d-flex text-decoration-none align-items-center fs-6'>
       Hãng Sãn Xuất
     </a>
     <a href="#"><i class='bx bx-store fs-4'></i></a>
