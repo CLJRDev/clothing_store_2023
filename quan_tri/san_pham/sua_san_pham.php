@@ -91,13 +91,13 @@
               <?php
                 if($sanpham['GioiTinh'] == 1){
                   echo "
-                  <option selected value='1'>Nam</option>
-                  <option value='0'>Nữ</option>";
+                  <option selected value='Nam'>Nam</option>
+                  <option value='Nữ'>Nữ</option>";
                 }
                 else
                   echo "
-                  <option value='1'>Nam</option>
-                  <option selected value='0'>Nữ</option>";
+                  <option value='Nam'>Nam</option>
+                  <option selected value='Nữ'>Nữ</option>";
               ?>
             </select> 
           </div> 

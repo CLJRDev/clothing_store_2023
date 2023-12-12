@@ -74,8 +74,8 @@
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Giới tính</div>
           <select name='GioiTinh' class="form-select" id="inputGroupSelect01 GioiTinh">
-            <option value="1">Nam</option>
-            <option value="0">Nữ</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
           </select> 
         </div> 
         <div class='col-md-6 pb-3'>

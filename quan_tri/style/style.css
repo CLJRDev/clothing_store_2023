@@ -67,7 +67,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .button_add,
-.button_edit{
+.button_edit,
+.button_reset{
   background-color: #3f6ad8;
   border: none;
   transition: 0.25s;
