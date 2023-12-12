@@ -3,7 +3,7 @@
     <button class='menu_button border-0 bg-white'><i class='bx bx-menu fs-4'></i></button>
   </div>
   <div class='d-flex align-items-center justify-content-between px-3 py-1'>
-    <a href="#" class='d-flex text-decoration-none align-items-center fs-6'>
+    <a href="../nguoi_dung/quan_ly_nguoi_dung.php" class='d-flex text-decoration-none align-items-center fs-6'>
       Người Dùng
     </a>
     <a href="#"><i class='bx bx-user fs-4'></i></a>

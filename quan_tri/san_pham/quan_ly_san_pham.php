@@ -24,11 +24,11 @@
       <div class="input-group px-3 row">
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Từ khóa</div>
-          <input type="text" name='Tukhoa' class="form-control tu_khoa" value='<?php if(isset($_SESSION['tu_khoa_san_pham'])) echo $_SESSION['tu_khoa_san_pham'];?>'>
+          <input type="text" name='Tukhoa' class="form-control js_text" value='<?php if(isset($_SESSION['tu_khoa_san_pham'])) echo $_SESSION['tu_khoa_san_pham'];?>'>
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Kích thước</div>
-          <select name="KichThuoc" class="form-select kich_thuoc" id="inputGroupSelect01 KichThuoc">
+          <select name="KichThuoc" class="form-select js_select" id="inputGroupSelect01 KichThuoc">
           <option value='-1'>Tất cả</option>
             <?php
               foreach($kichthuocs as $kichthuoc) {
@@ -42,15 +42,15 @@
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Giá từ</div>
-          <input type="number" name='GiaTu' class="form-control gia_tu" value='<?php if(isset($_SESSION['gia_tu'])) echo $_SESSION['gia_tu']; ?>'>
+          <input type="number" name='GiaTu' class="form-control js_text" value='<?php if(isset($_SESSION['gia_tu'])) echo $_SESSION['gia_tu']; ?>'>
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Giá đến</div>
-          <input type="number" name='GiaDen' class="form-control gia_den" value='<?php if(isset($_SESSION['gia_den'])) echo $_SESSION['gia_den']; ?>'>
+          <input type="number" name='GiaDen' class="form-control js_text" value='<?php if(isset($_SESSION['gia_den'])) echo $_SESSION['gia_den']; ?>'>
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Loại sản phẩm</div>
-          <select name="MaLoaiSanPham" class="form-select loai_san_pham" id="inputGroupSelect01 MaLoaiSanPham">
+          <select name="MaLoaiSanPham" class="form-select js_select" id="inputGroupSelect01 MaLoaiSanPham">
             <option value='-1'>Tất cả</option>
             <?php
               foreach($loaisanphams as $loaisanpham) {
@@ -64,7 +64,7 @@
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Hãng sản xuất</div>
-          <select name="MaHangSanXuat" class="form-select hang_san_xuat" id="inputGroupSelect01 TenHangSanXuat">
+          <select name="MaHangSanXuat" class="form-select js_select" id="inputGroupSelect01 TenHangSanXuat">
             <option value='-1'>Tất cả</option>
             <?php
               foreach($hangsanxuats as $hangsanxuat) {
@@ -78,7 +78,7 @@
         </div>  
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Giới tính</div>
-          <select name='GioiTinh' class="form-select gioi_tinh" id="inputGroupSelect01 GioiTinh">
+          <select name='GioiTinh' class="form-select js_select" id="inputGroupSelect01 GioiTinh">
             <?php 
               $gioi_tinhs = array('-1'=>'Tất cả', 'Nam'=>'Nam', 'Nữ'=>'Nữ');
               foreach($gioi_tinhs as $key => $value){
@@ -92,7 +92,7 @@
         </div> 
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Trạng Thái</div>
-          <select name='TrangThai' class="form-select trang_thai" id="inputGroupSelect01 TrangThai">
+          <select name='TrangThai' class="form-select js_select" id="inputGroupSelect01 TrangThai">
             <?php
               $trang_thais = array('-1' => 'Tất cả', '0' => 'Khóa', '1' => 'Kích hoạt');
               foreach($trang_thais as $key => $value){
@@ -176,7 +176,7 @@
                 $params['trang_thai'] = $_SESSION['trang_thai_san_pham'];
               }
             $page_index = 1;
-            $page_length = 10;
+            $page_length = 20;
             if(isset($_GET['pid']))
               $page_index = $_GET['pid'];
             $start_index = ($page_index - 1) * $page_length;
