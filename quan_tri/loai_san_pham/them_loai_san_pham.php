@@ -17,11 +17,11 @@
       <div class="input-group px-3 row">
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Tên Loại Sản Phẩm</div>
-          <input type="text" name='ten_loai_san_pham' class="form-control">
+          <input type="text" name='ten_loai_san_pham' class="form-control" required='true'>
         </div>  
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Hình Ảnh</div>
-          <input type="file" name='hinh_anh' class="form-control" id="inputGroupFile01">
+          <input type="file" name='hinh_anh' class="form-control" id="inputGroupFile01" required='true'>
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Trạng Thái</div>

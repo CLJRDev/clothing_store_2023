@@ -7,7 +7,7 @@
   $file_name = $_FILES['HinhAnh']['name'];
   $TrangThai = $_POST['TrangThai'];
 
-   $dem = execute_query("SELECT COUNT(*) FROM hangsanxuat WHERE TenHangSanXuat=:TenHangSanXuat AND MaHangSanXuat <> :MaHangSanXuat", array('TenHangSanXuat' => $TenHangSanXuat, 'MaHangSanXuat' => $MaHangSanXuat))[0][0];
+  $dem = execute_query("SELECT COUNT(*) FROM hangsanxuat WHERE TenHangSanXuat=:TenHangSanXuat AND MaHangSanXuat <> :MaHangSanXuat", array('TenHangSanXuat' => $TenHangSanXuat, 'MaHangSanXuat' => $MaHangSanXuat))[0][0];
   if($dem > 0){
     alert('Hãng sản xuẩt đã tồn tại');
     location("sua_hang_san_xuat.php?id={$MaHangSanXuat}");
@@ -19,7 +19,7 @@
   if($file_name == ''){    
     $sql = "UPDATE hangsanxuat SET TenHangSanXuat=:TenHangSanXuat,TrangThai=:TrangThai WHERE MaHangSanXuat=:MaHangSanXuat";
   }else{
-    $hinh_anh = execute_query("SELECT HinhAnh FROM hangsanxuat WHERE MaHangSanXuat=:MaHangSanXuat")[0][0];
+    $HinhAnh = execute_query("SELECT HinhAnh FROM hangsanxuat WHERE MaHangSanXuat=:MaHangSanXuat", array('MaHangSanXuat' => $MaHangSanXuat))[0][0];
     unlink("../../data/hang_san_xuat/{$HinhAnh}");
     $parts = explode('.',$HinhAnh);
     $date = new DateTimeImmutable();

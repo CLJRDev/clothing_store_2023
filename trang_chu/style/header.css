@@ -1,0 +1,53 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.header{
+  height: 70px;
+  background-color: #ae1c9a;
+}
+.header .logo{
+  width: 120px;
+}
+.header .category_button{
+  background-color: unset;
+  border: none;
+  position: relative;
+}
+.header .category_button .category{
+  position: absolute;
+  left: 0;
+  top: 55px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: none;
+}
+.header .category img{
+  width: 30px;
+  object-fit: cover;
+}
+.header .category_icon_container{
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 50%;
+}
+.header .search_container .input_search{
+  width: 600px;
+  border-radius: 20px;
+}
+.header .search_container .button_search{
+  border: none;
+  border-radius: 50%;
+  background-color: #ffbb38;
+}
+.header .user_img{
+  object-fit: cover;
+  width: 50px;
+  border-radius: 50%;
+}
+.button_cart,
+.button_user{
+  border: none;
+  background-color: unset;
+}
