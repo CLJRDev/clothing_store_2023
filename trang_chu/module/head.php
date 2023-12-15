@@ -7,3 +7,6 @@
 <link rel='stylesheet' href='style/header.css'>
 <link rel='stylesheet' href='style/body.css'>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<?php
+  include '../quan_tri/module/database.php';
+?>

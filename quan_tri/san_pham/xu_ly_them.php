@@ -11,10 +11,11 @@
   $MaHangSanXuat = $_POST['TenHangSanXuat'];
   $file_name = $_FILES['HinhAnh']['name'];
   $GioiTinh = $_POST['GioiTinh'];
+  $SoLuong = $_POST['SoLuong'];
   $TrangThai = $_POST['TrangThai'];
-  $dem = execute_query("SELECT COUNT(*) FROM sanpham WHERE TenSanPham=:TenSanPham", array('TenSanPham' => $TenSanPham))[0][0];
+  $dem = execute_query("SELECT COUNT(*) FROM sanpham WHERE TenSanPham=:TenSanPham AND MaKichThuoc=:MaKichThuoc", array('TenSanPham' => $TenSanPham, 'MaKichThuoc' => $MaKichThuoc))[0][0];
   if($dem > 0){
-    alert("Sản phẩm '{$TenSanPham}' đã tồn tại !");
+    alert("Sản phẩm '{$TenSanPham}' với kích thước '{$MaKichThuoc}' đã tồn tại !");
     location('them_san_pham.php');
     return;
   }
@@ -36,6 +37,17 @@
   $params['HinhAnh'] = $HinhAnh;
   $params['TrangThai'] = $TrangThai;
   execute_command($sql, $params);
-  alert("Thêm sản phẩm '{$TenSanPham}' thành công !");
-  location("them_san_pham.php");
+
+  //Chuyen SoLuong sang bang sanphamkichthuoc
+  $LayMaSanPham = execute_query("SELECT * FROM sanpham WHERE TenSanPham=:TenSanPham AND MaKichThuoc=:MaKichThuoc", array('MaKichThuoc' => $MaKichThuoc, 'TenSanPham' => $TenSanPham))[0];
+  $MaSanPham = $LayMaSanPham['MaSanPham']; 
+  $sql = "INSERT sanphamkichthuoc (MaKichThuoc,MaSanPham,SoLuong) VALUES (:MaKichThuoc,:MaSanPham,:SoLuong)";
+  $params = array();
+  $params['MaKichThuoc'] = $MaKichThuoc;
+  $params['MaSanPham'] = $MaSanPham;
+  $params['SoLuong'] = $SoLuong;
+  execute_command($sql, $params);
+
+  alert("Thêm sản phẩm '{$TenSanPham}' với số lượng '{$SoLuong}' thành công !");
+  location("quan_ly_san_pham.php");
 ?>

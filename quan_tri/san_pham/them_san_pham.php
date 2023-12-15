@@ -19,7 +19,7 @@
   ?>
   <form class='body' action='xu_ly_them.php' method='post' enctype='multipart/form-data'>
     <div class='form'> 
-      <div class='title p-3 mb-3 border-bottom fw-bold'>Thêm thông tin sản phẩm</div>
+      <div class='title p-3 mb-3 border-bottom fw-bold'>Thông Tin Sản Phẩm</div>
       <div class="input-group px-3 row">
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Tên sản phẩm</div>
@@ -77,6 +77,10 @@
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
           </select> 
+        </div>
+        <div class='col-md-6 pb-3'>
+          <div class='mb-1'>Số lượng</div>
+          <input type="number" name='SoLuong' class="form-control" id="SoLuong" required="true">
         </div> 
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Trạng Thái</div>

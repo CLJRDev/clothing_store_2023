@@ -1,17 +1,21 @@
 <?php
   include_once '../module/database.php';
   include_once '../module/thong_bao.php';
-  $param = array('MaSanPham' => $_GET['id']);
-  $data = execute_query("SELECT * FROM sanpham WHERE MaSanPham = :MaSanPham", $param);
+  $masanpham = $_GET['sanphamid'];
+  $makichthuoc = $_GET['kichthuocid'];
+  $params = array('MaSanPham' => $masanpham, 'MaKichThuoc'=>$makichthuoc);
+  $data = execute_query("SELECT * FROM sanpham WHERE MaSanPham=:MaSanPham AND MaKichThuoc=:MaKichThuoc", $params);
   if(count($data) == 0){
     alert('Sản phẩm không tồn tại !');
-    location('them_san_pham.php');
+    location('quan_ly_san_pham.php');
     return;
-  }else
+  }else{
     $sanpham = $data[0];
-  $kichthuocs = execute_query("SELECT * FROM kichthuoc ORDER BY MaKichThuoc");
-  $loaisanphams = execute_query("SELECT * FROM loaisanpham ORDER BY MaLoaiSanPham");
-  $hangsanxuats = execute_query("SELECT * FROM hangsanxuat ORDER BY MaHangSanXuat");
+    $kichthuocs = execute_query("SELECT * FROM kichthuoc ORDER BY MaKichThuoc");
+    $loaisanphams = execute_query("SELECT * FROM loaisanpham ORDER BY MaLoaiSanPham");
+    $hangsanxuats = execute_query("SELECT * FROM hangsanxuat ORDER BY MaHangSanXuat");
+    $soluong =  execute_query("SELECT * FROM sanphamkichthuoc WHERE MaSanPham=:MaSanPham AND MaKichThuoc=:MaKichThuoc ORDER BY MaKichThuoc,MaSanPham", $params)[0];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,6 +104,10 @@
                   <option selected value='Nữ'>Nữ</option>";
               ?>
             </select> 
+          </div>
+          <div class='pb-3'>
+            <div class='mb-1'>Số lượng</div>
+            <input type="number" name='SoLuong' class="form-control" id="SoLuong" required="true" value="<?php echo $soluong['SoLuong']; ?>">
           </div> 
           <div class='pb-3'>
             <div class='mb-1'>Trạng Thái</div>

@@ -8,35 +8,9 @@
 </head>
 <body>
   <div class='d-flex align-items-center justify-content-between header px-3'>
-    <div class='d-flex'>
-      <img class='logo' src="../logo2.avif">
-      <button class='d-flex align-items-center ms-4 category_button'>
-        <div class='d-flex align-items-center category_icon_container p-2'><i class='bx bx-menu text-white fs-4 category_icon'></i></div>      
-        <div class='fs-6 text-white ps-2'>Danh mục
-          <div class='category bg-white'>
-            <?php
-              include '../quan_tri/module/database.php';
-              $sql = 'SELECT * FROM loaisanpham';
-              $loai_san_phams = execute_query($sql);
-              foreach($loai_san_phams as $loai_san_pham){
-                echo "<a class='d-flex align-items-center px-3 py-2 text-decoration-none text-dark border-bottom' href=''>
-                    <img class='p-1' src='../data/loai_san_pham/{$loai_san_pham['HinhAnh']}'>
-                    <div class='ms-4'>{$loai_san_pham['TenLoaiSanPham']}</div>              
-                  </a>";
-              }
-            ?>        
-          </div>
-        </div>
-      </button>    
-    </div>    
-    <div class='search_container d-flex'>
-      <input type="text" name='tu_khoa' class='form-control input_search' placeholder='Nhập từ khóa cần tìm'>
-      <button class='px-3 py-2 button_search ms-2'><i class='bx bx-search' ></i></button>
-    </div>
-    <div class='d-flex justify-content-center align-items-center'>
-      <button class='button_cart'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></button>
-      <button class='button_user'><img class='user_img' src="../user_img.png"></button>
-    </div>
+    <?php
+      include 'module/header.php';
+    ?>
   </div>
   <div class='body containter-fluid'>
     <div class="containter-md slideshow d-flex justify-content-center align-items-center">     
@@ -80,10 +54,20 @@
     <div class='new_arrival_section py-5'>
       <div class='new_arrival container-md'>
         <div class='fw-bold h5'>HÀNG MỚI VỀ</div>
-        <div class='item_container'>
+        <div class='item_container'>          
           <?php
-            include 'hang_moi_ve.php';
-          ?>
+            $sql = "SELECT * FROM sanpham ORDER BY MaSanPham LIMIT 0,8";
+            $hang_moi_ves = execute_query($sql);            
+            foreach($hang_moi_ves as $hang_moi_ve){
+              echo "<div class='item bg-white overflow-hidden position-relative'>
+                      <img class='product_img mb-3' src='../data/san_pham/{$hang_moi_ve['HinhAnh']}'>
+                      <img class='rating_img ms-4' src='../img/rating.png'>
+                      <div class='fw-bold py-1 ms-4'>{$hang_moi_ve['TenSanPham']}</div>
+                      <div class='fw-bold ms-4'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$hang_moi_ve['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$hang_moi_ve['GiaKhuyenMai']}</span></div>
+                      <a href='xu_ly_them_gio_hang.php?id={$hang_moi_ve['MaSanPham']}'><button class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
+                    </div>";
+            }
+          ?>          
         </div>
       </div>
     </div> 
@@ -92,6 +76,22 @@
         <?php
           include 'flash_sale.php';
         ?>
+        <div class='item_container'>
+        <?php
+          $sql = "SELECT * FROM sanpham ORDER BY (GiaGoc - GiaKhuyenMai) DESC LIMIT 4";
+          $flash_sales = execute_query($sql);
+          foreach($flash_sales as $flash_sale){
+            echo "<div class='item bg-white overflow-hidden position-relative'>
+                    <div hidden id='{$flash_sale['MaSanPham']}'>{$flash_sale['MaSanPham']}</div>
+                    <img class='product_img mb-3' src='../data/san_pham/{$flash_sale['HinhAnh']}'>
+                    <img class='rating_img ms-4' src='../img/rating.png'>
+                    <div class='fw-bold py-1 ms-4'>{$flash_sale['TenSanPham']}</div>
+                    <div class='fw-bold ms-4'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$flash_sale['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$flash_sale['GiaKhuyenMai']}</span></div>
+                    <button onclick='addToCart({$flash_sale['MaSanPham']})' class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button>
+                  </div>";
+          }
+        ?>
+        </div>
       </div>
     </div>
     <div class='top_selling_section py-5'>
@@ -99,7 +99,23 @@
         <div class='fw-bold h5'>Sản Phẩm Bán Chạy</div>
         <div class='item_container mt-3'>
           <?php
-            include 'top_selling.php';
+            $sql = "SELECT * FROM sanpham 
+                    INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham
+                    INNER JOIN kichthuoc ON kichthuoc.MaKichThuoc = sanpham.MaKichThuoc AND kichthuoc.MaKichThuoc = sanphamkichthuoc.MaKichThuoc
+                    ORDER BY SoLuong ASC LIMIT 6";
+            $san_pham_ban_chays = execute_query($sql);
+            foreach($san_pham_ban_chays as $san_pham_ban_chay){
+              echo "<div class='item bg-white d-flex position-relative p-3'>
+                      <div hidden id='{$san_pham_ban_chay['MaSanPham']}'>{$san_pham_ban_chay['MaSanPham']}</div>
+                      <img class='product_img' src='../data/san_pham/{$san_pham_ban_chay['HinhAnh']}'>
+                      <div class='d-flex flex-column justify-content-center'>
+                        <img class='rating_img ms-3' src='../img/rating.png'>
+                        <div class='fw-bold py-1 ms-3'>{$san_pham_ban_chay['TenSanPham']}</div>
+                        <div class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_ban_chay['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_ban_chay['GiaKhuyenMai']}</span></div>
+                      </div>
+                      <button onclick='addToCart({$san_pham_ban_chay['MaSanPham']})' class='position-absolute fw-bold'>Add To Cart</button>
+                    </div>";
+            }
           ?>
         </div>
       </div>
@@ -109,81 +125,27 @@
         <div class='fw-bold h5'>Sản Phẩm Khác</div>
         <div class='item_container mt-3'>
         <?php
-          include 'other_products.php';
+          $sql = "SELECT * FROM sanpham ORDER BY MaSanPham LIMIT 12";
+          $san_pham_khacs = execute_query($sql);            
+          foreach($san_pham_khacs as $san_pham_khac){
+            echo "<div class='item bg-white overflow-hidden position-relative '>
+                    <div hidden id='{$san_pham_khac['MaSanPham']}'>{$san_pham_khac['MaSanPham']}</div>
+                    <img class='product_img mb-3' src='../data/san_pham/{$san_pham_khac['HinhAnh']}'>
+                    <img class='rating_img ms-3' src='../img/rating.png'>
+                    <div style='text-wrap: nowrap; font-size: 14px;' class='fw-bold py-1 ms-3'>{$san_pham_khac['TenSanPham']}</div>
+                    <div style='font-size: 14px;' class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_khac['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_khac['GiaKhuyenMai']}</span></div>
+                    <button onclick='addToCart({$san_pham_khac['MaSanPham']})' class='d-flex align-items-center justify-content-center position-absolute p-2'><i class='bx bx-cart-add fs-5'></i></button>
+                  </div>";
+          }
         ?>
         </div>
       </div>
     </div>
   </div>
   <div class='footer'>
-    <footer class="text-center text-lg-start bg-light text-dark">
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"></section>
-      <section class="">
-        <div class="container text-left text-md-start mt-5">
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-3" style="color: #ae1c9a!important;">
-            <i class="bi bi-building"></i>CongLamJr
-          </h6>
-          <p>
-            Công ty thành lập năm 2023 
-          </p>
-          </div>
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-3" style="color: #ae1c9a!important;">
-            Lối tắt
-          </h6>
-          <div class="pb-2">
-            <a href="#!" class="text-reset text-decoration-none">Loại sản phẩm</a>
-          </div>
-          <div class="pb-2">
-            <a href="#!" class="text-reset text-decoration-none">Hãng sản xuất</a>
-          </div>
-          <div class="pb-2">
-            <a href="#!" class="text-reset text-decoration-none">Sản phẩm mới</a>
-          </div>
-          <div class="pb-2">
-            <a href="#!" class="text-reset text-decoration-none">Sản phẩm bán chạy</a>
-          </div>
-          </div>
-
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-3" style="color: #ae1c9a!important;">
-              Dịch vụ khác
-            </h6>
-            <div class="pb-2">
-              <a href="#!" class="text-reset text-decoration-none">Khuyến mãi</a>
-            </div>
-            <div class="pb-2">
-              <a href="#!" class="text-reset text-decoration-none">Đổi trả</a>
-            </div>
-            <div class="pb-2">
-              <a href="#!" class="text-reset text-decoration-none">Đặt hàng</a>
-            </div>
-            <div class="pb-2">
-              <a href="#!" class="text-reset text-decoration-none">Trợ giúp</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-5">
-            <h6 class="text-uppercase fw-bold mb-3" style="color: #ae1c9a!important;">Liên lạc</h6>
-            <div class="pb-2">
-              <i class="bi bi-telephone-fill pr-1 text-decoration-none"></i> 0225.123.456
-            </div>
-            <div class="pb-2">
-              <i class="bi bi-phone-fill pr-1 text-decoration-none"></i> 079.123.4567
-            </div>
-            <div class="pb-2">
-              <i class="bi bi-envelope-fill pr-1 text-decoration-none"></i> website@gmail.com
-            </div>
-          </div>
-        </div>
-        </div>
-      </section>
-      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2023 Copyright:
-        <a class="text-reset pb-2 fw-bold text-decoration-none" href="#">CongLamJr.com</a>
-      </div>
-    </footer>
+    <?php
+      include 'module/footer.php';
+    ?>
   </div>
   <script src='js/danh_muc.js'></script>
   <script src='js/countdown.js'></script>

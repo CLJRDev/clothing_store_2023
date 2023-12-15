@@ -1,0 +1,111 @@
+.login {
+  background: url("../assets/images/homepage-one/login-bg.webp") no-repeat center/cover;
+}
+
+.login-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+}
+.login-section .review-form {
+  width: 51.2rem;
+  height: 63rem;
+  background-color: #FFFFFF;
+  padding: 4rem;
+  border-radius: 0.5rem;
+}
+.login-section .review-form .comment-title {
+  text-align: center;
+  margin-top: 5rem;
+}
+.login-section .review-form .review-inner-form {
+  display: block;
+  width: 100%;
+}
+.login-section .review-form .shop-btn {
+  width: 100%;
+  margin: 0 0 2rem 0;
+}
+.login-section .review-form .shop-btn::after {
+  display: none;
+}
+.login-section .review-form .shop-account {
+  color: #797979;
+  font-size: 1.3rem;
+}
+.login-section .review-form .shop-account a {
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+@media (max-width:767px) {
+  .login-section .review-form {
+    padding: 2rem;
+    height: auto;
+  }
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0px;
+}
+.checkbox .forget-pass p {
+  color: #AE1C9A;
+}
+
+.checkbox-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.checkbox-item p {
+  margin-bottom: 0;
+  color: #797979;
+}
+.checkbox-item p .inner-text {
+  color: #232532;
+}
+.checkbox-item .address {
+  font-size: 1.5rem;
+}
+
+.account-section .review-form {
+  width: 57.2rem;
+  height: 79.1rem;
+}
+.account-section .account-inner-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.account-section .account-inner-form .review-form-name {
+  width: 100%;
+}
+.account-section .city-inner-form {
+  margin-bottom: 0;
+}
+.account-section .address-form {
+  margin: 2rem 0;
+}
+@media (max-width:767px) {
+  .account-section .review-form {
+    padding: 2rem;
+    height: auto;
+  }
+  .account-section .account-inner-form {
+    flex-direction: column;
+  }
+  .account-section .checkbox-item {
+    margin: 1rem;
+  }
+}

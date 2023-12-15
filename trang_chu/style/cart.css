@@ -1,0 +1,8 @@
+table tbody tr{
+  height: 80px;
+}
+table tbody tr td img{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}

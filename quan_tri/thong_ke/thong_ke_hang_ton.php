@@ -4,11 +4,12 @@
   $loaisanphams = execute_query("SELECT * FROM loaisanpham WHERE TrangThai=1");
   $hangsanxuats = execute_query("SELECT * FROM hangsanxuat WHERE TrangThai=1");
   $kichthuocs = execute_query("SELECT * FROM kichthuoc");
+  $giohangs = execute_query("SELECT * FROM giohang WHERE TrangThai=1");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Quản lý sản phẩm</title>
+  <title>Thống kê hàng tồn</title>
   <?php
     include '../module/head.php';
   ?>
@@ -18,7 +19,7 @@
     include '../module/header.php';
     include '../module/sidebar.php';
   ?>
-  <form class='body' action='xu_ly_tim_kiem.php' method='post'>
+  <form class='body' action='xu_ly_tim_kiem_hang_ton.php' method='post'>
     <div class='form'> 
       <div class='title p-3 mb-3 border-bottom fw-bold'>Thông Tin Sản Phẩm</div>
       <div class="input-group px-3 row">
@@ -39,14 +40,6 @@
               }
             ?>
           </select>
-        </div>
-        <div class='col-md-6 pb-3'>
-          <div class='mb-1'>Giá từ</div>
-          <input type="number" name='GiaTu' class="form-control js_text" value='<?php if(isset($_SESSION['gia_tu'])) echo $_SESSION['gia_tu']; ?>'>
-        </div>
-        <div class='col-md-6 pb-3'>
-          <div class='mb-1'>Giá đến</div>
-          <input type="number" name='GiaDen' class="form-control js_text" value='<?php if(isset($_SESSION['gia_den'])) echo $_SESSION['gia_den']; ?>'>
         </div>
         <div class='col-md-6 pb-3'>
           <div class='mb-1'>Loại sản phẩm</div>
@@ -110,52 +103,29 @@
       <div class='title p-3 mb-2 border-bottom fw-bold'>Danh sách sản phẩm</div>
       <div class='action_container ps-3'>
         <button class='button_add text-white py-2 px-3 rounded' type='submit'>Tìm Kiếm <i class='bx bx-search' ></i></button>
-        <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href="them_san_pham.php">Thêm Mới <i class='bx bx-message-square-add'></i></a></button>
+        <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href="thong_ke_theo_thang.php">Thống Hàng Theo Tháng <i class='bx bx-data'></i></a></button>
         <button class='button_reset text-white py-2 px-3 rounded' type='button'>Reset <i class='bx bx-refresh'></i></i></button>
       </div>
       <table class='table table-striped border-top mt-2 table-bordered'>
         <thead>
           <tr>
             <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
-            <th style='min-width: 250px;' class='text-center'>Tên sản phẩm</th>
-            <th style='min-width: 120px; width: 60px;' class='text-center'>Số lượng</th>
-            <th style='width: 60px; min-width: 120px;' class='text-center'>Giá gốc</th>
-            <th style='width: 60px; min-width: 150px;' class='text-center'>Giá khuyến mãi</th>
-            <th style='width: 80px; min-width: 120px;' class='text-center'>Giới tính</th>
-            <th style='width: 80px; min-width: 120px;' class='text-center'>Kích thước</th>
-            <th style='width: 80px; min-width: 150px;' class='text-center'>Loại sản phẩm</th>
-            <th style='width: 80px; min-width: 150px;' class='text-center'>Hãng sản xuất</th>
-            <th style='width: 100px; min-width: 120px;' class='text-center'>Trạng Thái</th>
-            <th style='width: 120px; min-width: 120px;' class='text-center'>Hành Động</th>
+            <th style='width: 100px; min-width: 150px;' class='text-center'>Tên sản phẩm</th>
+            <th style='width: 50px; min-width: 80px;' class='text-center'>Giới tính</th>
+            <th style='width: 100px; min-width: 100px;' class='text-center'>Kích thước</th>
+            <th style='width: 120px; min-width: 120px;' class='text-center'>Loại sản phẩm</th>
+            <th style='width: 120px; min-width: 120px;' class='text-center'>Hãng sản xuất</th>
+            <th style='width: 100px; min-width: 100px;' class='text-center'>Trạng Thái</th>
+            <th style='width: 120px; min-width: 120px;' class='text-center'>Tổng bán được</th>
+            <th style='width: 50px; min-width: 100px;' class='text-center'>Còn tồn</th>
           </tr>
         </thead>
         <tbody>
           <?php
-            $sql = "SELECT
-                      sanpham.MaSanPham,
-                      sanpham.TenSanPham,
-                      sanphamkichthuoc.SoLuong,
-                      sanpham.HinhAnh,
-                      sanpham.GiaGoc,
-                      sanpham.GiaKhuyenMai,
-                      sanpham.MoTa,
-                      sanpham.GioiTinh,
-                      kichthuoc.KichThuoc,
-                      sanpham.MaKichThuoc,
-                      loaisanpham.TenLoaiSanPham,
-                      hangsanxuat.TenHangSanXuat,
-                      sanpham.TrangThai
-                    FROM
-                        sanpham
-                    INNER JOIN
-                        kichthuoc ON sanpham.MaKichThuoc = kichthuoc.MaKichThuoc
-                    INNER JOIN
-                        loaisanpham ON sanpham.MaLoaiSanPham = loaisanpham.MaLoaiSanPham
-                    INNER JOIN
-                        hangsanxuat ON sanpham.MaHangSanXuat = hangsanxuat.MaHangSanXuat
-                    INNER JOIN
-                        sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham
-                    WHERE 1=1";
+            $sql = "SELECT MaSanPham, TenSanPham, sanpham.HinhAnh, GiaGoc, GiaKhuyenMai, MoTa, GioiTinh, kichthuoc.KichThuoc, loaisanpham.TenLoaiSanPham, hangsanxuat.TenHangSanXuat, sanpham.TrangThai FROM `sanpham` 
+                    INNER JOIN kichthuoc ON sanpham.MaKichThuoc = kichthuoc.MaKichThuoc
+                    INNER JOIN loaisanpham ON sanpham.MaLoaiSanPham = loaisanpham.MaLoaiSanPham
+                    INNER JOIN hangsanxuat ON sanpham.MaHangSanXuat = hangsanxuat.MaHangSanXuat WHERE 1=1";
             $params = array();
             if(isset($_SESSION['tu_khoa_san_pham']))
               if($_SESSION['tu_khoa_san_pham'] != ''){
@@ -166,16 +136,6 @@
               if($_SESSION['kich_thuoc'] != -1){
                 $sql .= " AND sanpham.MaKichThuoc = :kich_thuoc";
                 $params['kich_thuoc'] = $_SESSION['kich_thuoc'];
-              }
-            if(isset($_SESSION['gia_tu']))
-              if($_SESSION['gia_tu'] != ''){
-                $sql .= " AND GiaKhuyenMai >= :gia_tu";
-                $params['gia_tu'] = $_SESSION['gia_tu'];
-              }
-            if(isset($_SESSION['gia_den']))
-              if($_SESSION['gia_den'] != ''){
-                $sql .= " AND GiaKhuyenMai <= :gia_den";
-                $params['gia_den'] = $_SESSION['gia_den'];
               }
             if(isset($_SESSION['ma_loai_san_pham']))
               if($_SESSION['ma_loai_san_pham'] != -1){
@@ -209,18 +169,13 @@
                 <tr>
                   <td class='text-center'>{$sanpham['MaSanPham']}</td>
                   <td>{$sanpham['TenSanPham']}</td>
-                  <td class='text-center'>{$sanpham['SoLuong']}</td>
-                  <td>{$sanpham['GiaGoc']}</td>
-                  <td>{$sanpham['GiaKhuyenMai']}</td>
                   <td class='text-center'>{$sanpham['GioiTinh']}</td>
                   <td class='text-center'>{$sanpham['KichThuoc']}</td>
                   <td>{$sanpham['TenLoaiSanPham']}</td>
                   <td>{$sanpham['TenHangSanXuat']}</td>
                   <td class='text-center'><input onclick='return false;' type='checkbox' ".($sanpham['TrangThai'] == 1 ? 'checked' : 'unchecked')."></td>
-                  <td class='text-center d-flex justify-content-around align-items-center'>
-                    <a class='text-dark' href='sua_san_pham.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
-                    <a class='text-dark' href='xu_ly_xoa.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
-                  </td>
+                  <td class='text-center'></td>
+                  <td class='text-center'></td>
                 </tr>
               ";
             }
