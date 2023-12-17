@@ -1,4 +1,7 @@
 <?php
+  include '../module/kiem_tra_dang_nhap.php';
+?>
+<?php
   include_once '../module/database.php';
   $loaisanphams = execute_query("SELECT * FROM loaisanpham WHERE TrangThai=1");
   $hangsanxuats = execute_query("SELECT * FROM hangsanxuat WHERE TrangThai=1");

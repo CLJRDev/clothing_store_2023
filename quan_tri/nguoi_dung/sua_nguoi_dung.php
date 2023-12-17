@@ -1,4 +1,7 @@
 <?php
+  include '../module/kiem_tra_dang_nhap.php';
+?>
+<?php
   include_once '../module/database.php';
   include_once '../module/thong_bao.php';
   $param = array('TaiKhoan' => $_GET['id']);

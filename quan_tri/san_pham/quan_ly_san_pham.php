@@ -1,5 +1,7 @@
 <?php
-  session_start();
+  include '../module/kiem_tra_dang_nhap.php';
+?>
+<?php
   include_once '../module/database.php';
   $loaisanphams = execute_query("SELECT * FROM loaisanpham WHERE TrangThai=1");
   $hangsanxuats = execute_query("SELECT * FROM hangsanxuat WHERE TrangThai=1");
@@ -198,7 +200,7 @@
                 $params['trang_thai'] = $_SESSION['trang_thai_san_pham'];
               }
             $page_index = 1;
-            $page_length = 20;
+            $page_length = 10;
             if(isset($_GET['pid']))
               $page_index = $_GET['pid'];
             $start_index = ($page_index - 1) * $page_length;

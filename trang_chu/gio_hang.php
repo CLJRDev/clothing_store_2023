@@ -44,7 +44,7 @@
                         INNER JOIN sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham 
                         WHERE sanpham.MaSanPham=:ma_san_pham";
                 $san_pham = execute_query($sql, array('ma_san_pham'=>$id))[0];
-                $sql = "SELECT DISTINCT kichthuoc.KichThuoc
+                $sql = "SELECT DISTINCT kichthuoc.KichThuoc,sanpham.MaKichThuoc
                         FROM sanpham
                         INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham
                         INNER JOIN kichthuoc ON sanphamkichthuoc.MaKichThuoc = kichthuoc.MaKichThuoc WHERE sanpham.TenSanPham=:ten_san_pham";
@@ -56,13 +56,14 @@
                 $so_luong = execute_query($sql, array('ma_san_pham'=>$id));
                 echo "<tr>
                   <td class='text-center d-flex align-items-center'>
+                    <input hidden name='san_pham_{$id}' value='{$id}'>
                     <img src='../data/san_pham/{$san_pham['HinhAnh']}'>
                     <div class='ms-4'>{$san_pham['TenSanPham']}</div>
                   </td>
                   <td class='text-center'>"."$"."{$san_pham['GiaKhuyenMai']}</td>
-                  <td class='text-center'><input style='width: 50%;' class='text-center' type='number' min='1' max='{$san_pham['SoLuong']}' required='true'></td>
+                  <td class='text-center'><input style='width: 50%;' class='text-center' type='number' name='so_luong_{$id}' min='1' max='{$san_pham['SoLuong']}' required='true'></td>
                   <td class='text-center'>
-                    <select name='kich_thuoc'>";
+                    <select name='kich_thuoc_{$id}'>";
                       foreach($kich_thuocs as $kich_thuoc){
                         echo "<option value='{$kich_thuoc['MaKichThuoc']}'>{$kich_thuoc['KichThuoc']}</option>";
                       }
@@ -93,7 +94,10 @@
           </tr>           -->
         </tbody>
       </table>
-    </div>  
+      <div class='d-flex justify-content-center'>
+        <button type='submit' style='background-color: #ae1c9a;' class='btn text-white fw-bold px-4'>Đặt Hàng</button>
+      </div>      
+    </div>     
   </form>
   <div class='footer'>
     <?php

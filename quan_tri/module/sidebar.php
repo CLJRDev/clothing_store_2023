@@ -44,4 +44,10 @@
     </a>
     <a href="../thong_ke/thong_ke_hang_ton.php"><i class='bx bx-coin-stack fs-4'></i></a>
   </div>
+  <div class='d-flex align-items-center justify-content-between px-3 py-1'>
+    <a href="../../trang_chu/trang_chu.php" class='d-flex text-decoration-none align-items-center fs-6'>
+      Trang Chủ
+    </a>
+    <a href="../../thong_ke/trang_chu.php"><i class='bx bx-home fs-4'></i></a>
+  </div>
 </div>

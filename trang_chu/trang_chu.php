@@ -1,3 +1,6 @@
+<?php
+  include 'kiem_tra_dang_nhap.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +10,11 @@
   ?>
 </head>
 <body>
-  <div class='d-flex align-items-center justify-content-between header px-3'>
+  <form action='xu_ly_tim_kiem.php' method='post' style='position: fixed; z-index: 10000;' class='d-flex align-items-center justify-content-between header px-3'>
     <?php
       include 'module/header.php';
     ?>
-  </div>
+  </form>
   <div class='body containter-fluid'>
     <div class="containter-md slideshow d-flex justify-content-center align-items-center">     
       <img class='slide_img' src="../img/slide2.jpg" alt="">      
@@ -87,7 +90,7 @@
                     <img class='rating_img ms-4' src='../img/rating.png'>
                     <div class='fw-bold py-1 ms-4'>{$flash_sale['TenSanPham']}</div>
                     <div class='fw-bold ms-4'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$flash_sale['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$flash_sale['GiaKhuyenMai']}</span></div>
-                    <button onclick='addToCart({$flash_sale['MaSanPham']})' class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button>
+                    <a href='xu_ly_them_gio_hang.php?id={$flash_sale['MaSanPham']}'><button onclick='addToCart({$flash_sale['MaSanPham']})' class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
                   </div>";
           }
         ?>
@@ -113,7 +116,7 @@
                         <div class='fw-bold py-1 ms-3'>{$san_pham_ban_chay['TenSanPham']}</div>
                         <div class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_ban_chay['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_ban_chay['GiaKhuyenMai']}</span></div>
                       </div>
-                      <button onclick='addToCart({$san_pham_ban_chay['MaSanPham']})' class='position-absolute fw-bold'>Add To Cart</button>
+                      <a href='xu_ly_them_gio_hang.php?id={$san_pham_ban_chay['MaSanPham']}'><button onclick='addToCart({$san_pham_ban_chay['MaSanPham']})' class='position-absolute fw-bold'>Add To Cart</button></a>
                     </div>";
             }
           ?>
@@ -134,7 +137,7 @@
                     <img class='rating_img ms-3' src='../img/rating.png'>
                     <div style='text-wrap: nowrap; font-size: 14px;' class='fw-bold py-1 ms-3'>{$san_pham_khac['TenSanPham']}</div>
                     <div style='font-size: 14px;' class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_khac['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_khac['GiaKhuyenMai']}</span></div>
-                    <button onclick='addToCart({$san_pham_khac['MaSanPham']})' class='d-flex align-items-center justify-content-center position-absolute p-2'><i class='bx bx-cart-add fs-5'></i></button>
+                    <a href='xu_ly_them_gio_hang.php?id={$san_pham_khac['MaSanPham']}'><button onclick='addToCart({$san_pham_khac['MaSanPham']})' class='d-flex align-items-center justify-content-center position-absolute p-2'><i class='bx bx-cart-add fs-5'></i></button></a>
                   </div>";
           }
         ?>

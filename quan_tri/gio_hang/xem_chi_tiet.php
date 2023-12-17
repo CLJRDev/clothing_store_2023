@@ -1,4 +1,7 @@
 <?php
+  include '../module/kiem_tra_dang_nhap.php';
+?>
+<?php
   include_once '../module/database.php';
   include_once '../module/thong_bao.php';
   $param = array('MaGioHang' => $_GET['id']);
@@ -10,7 +13,7 @@
   }
   else{
     $MaGioHang = $_GET['id'];
-    $chitietgiohangs = execute_query("SELECT 8 FROM chitietgiohang WHERE MaGioHang = :MaGioHang", array('MaGioHang' => $MaGioHang));
+    $chitietgiohangs = execute_query("SELECT * FROM chitietgiohang WHERE MaGioHang = :MaGioHang", array('MaGioHang' => $MaGioHang));
     if(count($chitietgiohangs) == 0){
       alert('Chi tiết giỏ hàng không tồn tại !');
       location('quan_ly_gio_hang.php');
@@ -50,21 +53,20 @@
         <tbody>
           <?php
             include_once '../module/database.php';
-            $sql = "SELECT MaCTGH,chitietgiohang.MaGioHang,sanpham.TenSanPham,chitietgiohang.SoLuong,chitietgiohang.Gia FROM chitietgiohang
-              INNER JOIN sanpham ON chitietgiohang.MaSanPham = sanpham.MaSanPham
-              WHERE MaGioHang='{$MaGioHang}'";
+            $sql = "SELECT * FROM chitietgiohang INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang
+            INNER JOIN sanpham ON sanpham.MaSanPham = chitietgiohang.MaSanPham WHERE chitietgiohang.MaGioHang={$MaGioHang}";
             $loop = '1';
             $mangtong = array();
             $giohangs = execute_query($sql);
             foreach($giohangs as $giohang){
               $loop = $loop + 1;
-              $tong = $giohang['Gia'] * $giohang['SoLuong'];
+              $tong = $giohang['GiaKhuyenMai'] * $giohang['SoLuong'];
               $mangtong[$loop] = $tong;
               echo "
                 <tr>
                   <td class='text-center'>{$giohang['MaGioHang']}</td>
                   <td>{$giohang['TenSanPham']}</td>
-                  <td class='text-center'>{$giohang['Gia']}</td>
+                  <td class='text-center'>{$giohang['GiaKhuyenMai']}</td>
                   <td class='text-center'>{$giohang['SoLuong']}</td>
                   <td class='text-center'>{$tong}</td>
                 </tr>

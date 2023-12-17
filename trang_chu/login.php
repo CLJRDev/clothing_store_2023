@@ -30,13 +30,13 @@
           </div>
           <div class="review-form-name checkbox">
           <div class="forget-pass">
-          <p style="text-align: center;"><a href="../form_cap_mat_khau_moi_qua_email.php" style="color: purple;">Quên mật khẩu?</a></p>
+          <p style="text-align: center;"><a href="form_cap_mat_khau_moi_qua_email.php" style="color: purple;">Quên mật khẩu?</a></p>
           </div>
           </div>
           </div>
           <div class="login-btn text-center">
           <button type="submit" class="shop-btn btn btn-primary">Đăng nhập</button>
-          <span class="shop-account">Chưa có tài khoản ?<a href="">Đăng ký ngay!
+          <span class="shop-account">Chưa có tài khoản ?<a href="tao_tai_khoan.php">Đăng ký ngay!
           </a></span>
           </div>
         </div>
