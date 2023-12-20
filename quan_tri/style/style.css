@@ -28,6 +28,14 @@
 #header .notification_icon{
   cursor: pointer;
 }
+#header .bell_container .notification_number{
+  z-index: 1000;
+  left: 13px;
+  top: -9px;
+  font-size: 12px;
+  padding: 0 6px;
+  border-radius: 50%;
+}
 .sidebar{
   position: fixed;
   top: 60px;

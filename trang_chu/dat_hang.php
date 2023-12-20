@@ -68,7 +68,7 @@
                     </div>";
             }
           ?>
-          <div class='d-flex justify-content-between px-3'>
+          <div class='d-flex justify-content-between align-items-center px-3'>
             <div class='fw-bold fs-5'>Total:</div>
             <div class='total_price fw-bold'>$<?php echo $tong_tien; ?></div>
             <input hidden type="text" name='tong_tien' value='<?php echo $tong_tien; ?>'>

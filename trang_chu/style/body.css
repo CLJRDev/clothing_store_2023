@@ -194,6 +194,3 @@
 .display .products{
   grid-template-columns: repeat(3, 1fr);
 }
-.body .products_container{
-
-}
