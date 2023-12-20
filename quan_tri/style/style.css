@@ -30,8 +30,8 @@
 }
 #header .bell_container .notification_number{
   z-index: 1000;
-  left: 13px;
-  top: -9px;
+  left: 27%;
+  top: -8px;
   font-size: 12px;
   padding: 0 6px;
   border-radius: 50%;

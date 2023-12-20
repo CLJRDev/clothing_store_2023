@@ -52,7 +52,16 @@
   $hinh_anh = execute_query('SELECT HinhAnh FROM nguoidung WHERE TaiKhoan=:tai_khoan', array('tai_khoan' => $_SESSION['TenTaiKhoan']))[0][0];
 ?>
 <div class='d-flex justify-content-center align-items-center'>
-  <a href='gio_hang.php' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
+  <a href='gio_hang.php' class='text-decoration-none cart_container position-relative'>
+    <?php
+      if(isset($_SESSION['cartItems'])){
+        $cart_quantity = count($_SESSION['cartItems']);
+        if($cart_quantity > 0)
+          echo "<div class='position-absolute bg-danger fw-bold text-white notification_number'>{$cart_quantity}</div>";
+      }
+    ?>
+    <i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i>
+  </a>
   <button type='button' class='button_user'><img class='user_img' src='../data/nguoi_dung/<?php echo $hinh_anh; ?>'></button>
 </div>
 <?php

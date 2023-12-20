@@ -49,6 +49,13 @@
   width: 50px;
   border-radius: 50%;
 }
+.header .cart_container .notification_number{
+  left: 45%;
+  top: -12px;
+  padding: 0 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}
 .button_cart,
 .button_user{
   border: none;
