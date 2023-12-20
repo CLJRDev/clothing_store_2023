@@ -41,11 +41,12 @@
         <button class='button_add text-white py-2 px-3 rounded' type='submit'>Thêm Mới <i class='bx bx-message-square-add'></i></button>
         <button class='button_add text-white py-2 px-3 rounded' type='reset'>Reset <i class='bx bx-refresh'></i></button>
       </div>   
-      <table class='table table-striped border-top mt-2 table-bordered'>
+      <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
           <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
-            <th style='min-width: 200px;'>Tên Hãng Sản Xuất</th>
+            <th class='text-center' style='min-width: 200px; width: 200px;'>Logo</th>  
+            <th style='min-width: 200px;' class='text-center'>Tên Hãng Sản Xuất</th>      
             <th style='width: 150px; min-width: 150px;' class='text-center'>Trạng Thái</th>
             <th style='width: 120px; min-width: 120px;' class='text-center'>Hành Động</th>
           </tr>
@@ -59,11 +60,12 @@
               echo "
                 <tr>
                   <td class='text-center'>{$hangsanxuat['MaHangSanXuat']}</td>
-                  <td>{$hangsanxuat['TenHangSanXuat']}</td>
+                  <td class='text-center'><img src='../../data/hang_san_xuat/{$hangsanxuat['HinhAnh']}' style='width: 100px; height: 80px; object-fit:contain'></td>
+                  <td class='text-center'>{$hangsanxuat['TenHangSanXuat']}</td>
                   <td class='text-center'><input onclick='return false;' type='checkbox' ".($hangsanxuat['TrangThai'] == 1 ? 'checked' : '')."></td>
-                  <td class='text-center d-flex justify-content-around align-items-center'>
-                    <a class='text-dark' href='sua_hang_san_xuat.php?id={$hangsanxuat['MaHangSanXuat']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
-                    <a class='text-dark' href='xu_ly_xoa.php?id={$hangsanxuat['MaHangSanXuat']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
+                  <td class='text-center'>
+                    <a class='text-dark me-3' href='sua_hang_san_xuat.php?id={$hangsanxuat['MaHangSanXuat']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
+                    <a class='text-dark ms-3' href='xu_ly_xoa.php?id={$hangsanxuat['MaHangSanXuat']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
                   </td>
                 </tr>
               ";

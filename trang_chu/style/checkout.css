@@ -1,0 +1,25 @@
+.detail,
+.summary{
+  width: 40%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
+  align-self: start;
+}
+.title,
+.total_price{
+  color: #ae1c9a;
+}
+.input_detail{
+  width: 100%;
+}
+body{
+  background-color: #f9edf7;
+}
+.place_order_button{
+  border: none;
+  background-color: #ae1c9a;
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+}

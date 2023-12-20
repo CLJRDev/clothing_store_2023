@@ -6,3 +6,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,100&display=swap" rel="stylesheet">
 <link rel='stylesheet' href='../style/style.css'>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<?php
+  include_once '../module/database.php';
+?>

@@ -1,10 +1,12 @@
 <?php
-  session_start();
   include_once '../module/database.php';
+  include '../module/kiem_tra_dang_nhap.php';
   $loaisanphams = execute_query("SELECT * FROM loaisanpham WHERE TrangThai=1");
   $hangsanxuats = execute_query("SELECT * FROM hangsanxuat WHERE TrangThai=1");
   $kichthuocs = execute_query("SELECT * FROM kichthuoc");
   $giohangs = execute_query("SELECT * FROM giohang WHERE TrangThai=1");
+  $sanphamkichthuocs = execute_query("SELECT * FROM sanphamkichthuoc");
+  $chitietgiohangs = execute_query("SELECT * FROM chitietgiohang");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,26 +108,31 @@
         <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href="thong_ke_theo_thang.php">Thống Hàng Theo Tháng <i class='bx bx-data'></i></a></button>
         <button class='button_reset text-white py-2 px-3 rounded' type='button'>Reset <i class='bx bx-refresh'></i></i></button>
       </div>
-      <table class='table table-striped border-top mt-2 table-bordered'>
+      <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
-            <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
-            <th style='width: 100px; min-width: 150px;' class='text-center'>Tên sản phẩm</th>
-            <th style='width: 50px; min-width: 80px;' class='text-center'>Giới tính</th>
-            <th style='width: 100px; min-width: 100px;' class='text-center'>Kích thước</th>
-            <th style='width: 120px; min-width: 120px;' class='text-center'>Loại sản phẩm</th>
-            <th style='width: 120px; min-width: 120px;' class='text-center'>Hãng sản xuất</th>
-            <th style='width: 100px; min-width: 100px;' class='text-center'>Trạng Thái</th>
-            <th style='width: 120px; min-width: 120px;' class='text-center'>Tổng bán được</th>
-            <th style='width: 50px; min-width: 100px;' class='text-center'>Còn tồn</th>
+            <th style='min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
+            <th style='min-width: 150px;'>Tên sản phẩm</th>
+            <th style='min-width: 100px;' class='text-center'>Hình ảnh</th>
+            <th style='min-width: 80px;' class='text-center'>Giới tính</th>
+            <th style='min-width: 80px;' class='text-center'>Kích thước</th>
+            <th style='min-width: 80px;' class='text-center'>Loại sản phẩm</th>
+            <th style='min-width: 80px;' class='text-center'>Hãng sản xuất</th>
+            <th style='min-width: 70px;' class='text-center'>Trạng Thái</th>
+            <th style='min-width: 80px;' class='text-center'>Đã bán</th>
+            <th style='min-width: 80px;' class='text-center'>Còn tồn</th>
           </tr>
         </thead>
         <tbody>
           <?php
-            $sql = "SELECT MaSanPham, TenSanPham, sanpham.HinhAnh, GiaGoc, GiaKhuyenMai, MoTa, GioiTinh, kichthuoc.KichThuoc, loaisanpham.TenLoaiSanPham, hangsanxuat.TenHangSanXuat, sanpham.TrangThai FROM `sanpham` 
+            $sql = "SELECT sanpham.MaSanPham, TenSanPham, sanpham.HinhAnh, GiaGoc, GiaKhuyenMai, MoTa, GioiTinh, kichthuoc.KichThuoc, loaisanpham.TenLoaiSanPham, hangsanxuat.TenHangSanXuat, sanpham.TrangThai, sanphamkichthuoc.SoLuong, sanphamkichthuoc.BanDuoc FROM sanpham 
                     INNER JOIN kichthuoc ON sanpham.MaKichThuoc = kichthuoc.MaKichThuoc
                     INNER JOIN loaisanpham ON sanpham.MaLoaiSanPham = loaisanpham.MaLoaiSanPham
-                    INNER JOIN hangsanxuat ON sanpham.MaHangSanXuat = hangsanxuat.MaHangSanXuat WHERE 1=1";
+                    INNER JOIN hangsanxuat ON sanpham.MaHangSanXuat = hangsanxuat.MaHangSanXuat 
+                    INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham AND sanpham.MaKichThuoc = sanphamkichthuoc.MaKichThuoc 
+                    -- INNER JOIN chitietgiohang ON sanpham.MaSanPham = chitietgiohang.MaSanPham 
+                    -- INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang AND giohang.TrangThai = 1
+                    WHERE 1 = 1";
             $params = array();
             if(isset($_SESSION['tu_khoa_san_pham']))
               if($_SESSION['tu_khoa_san_pham'] != ''){
@@ -158,7 +165,7 @@
                 $params['trang_thai'] = $_SESSION['trang_thai_san_pham'];
               }
             $page_index = 1;
-            $page_length = 20;
+            $page_length = 5;
             if(isset($_GET['pid']))
               $page_index = $_GET['pid'];
             $start_index = ($page_index - 1) * $page_length;
@@ -169,13 +176,14 @@
                 <tr>
                   <td class='text-center'>{$sanpham['MaSanPham']}</td>
                   <td>{$sanpham['TenSanPham']}</td>
+                  <td class='text-center'><img src='../../data/san_pham/{$sanpham['HinhAnh']}' style='width: 100px; height: 100px; object-fit: contain;'></td>
                   <td class='text-center'>{$sanpham['GioiTinh']}</td>
                   <td class='text-center'>{$sanpham['KichThuoc']}</td>
-                  <td>{$sanpham['TenLoaiSanPham']}</td>
-                  <td>{$sanpham['TenHangSanXuat']}</td>
+                  <td class='text-center'>{$sanpham['TenLoaiSanPham']}</td>
+                  <td class='text-center'>{$sanpham['TenHangSanXuat']}</td>
                   <td class='text-center'><input onclick='return false;' type='checkbox' ".($sanpham['TrangThai'] == 1 ? 'checked' : 'unchecked')."></td>
-                  <td class='text-center'></td>
-                  <td class='text-center'></td>
+                  <td class='text-center'>{$sanpham['BanDuoc']}</td>
+                  <td class='text-center'>{$sanpham['SoLuong']}</td>
                 </tr>
               ";
             }
@@ -190,7 +198,7 @@
             if($row_number % $page_length != 0)
               $page_number++;
             for($i = 1; $i <= $page_number; $i++)
-              echo "<a href='quan_ly_san_pham.php?pid={$i}' class='page-link'>{$i}</a>";  
+              echo "<a href='thong_ke_hang_ton.php?pid={$i}' class='page-link'>{$i}</a>";  
           ?>          
         </ul>
       </div>

@@ -10,11 +10,11 @@
   ?>
 </head>
 <body>
-  <div class='d-flex align-items-center justify-content-between header px-3'>
+  <form action='xu_ly_tim_kiem.php' method='post' class='d-flex align-items-center justify-content-between header px-3'>
     <?php
       include 'module/header.php';
-    ?>  
-  </div>
+    ?>
+  </form>
   <div class='body containter-fluid' style='background-color: rgba(174, 28, 154, 0.08);'>
     <div class='container-md py-5 all_products'>
       <div class='fw-bold h5'>TẤT CẢ SẢN PHẨM</div>
@@ -44,7 +44,7 @@
                       <div class='fw-bold py-1 ms-3'>{$san_pham['TenSanPham']}</div>
                       <div class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham['GiaKhuyenMai']}</span></div>
                     </div>
-                    <button class='position-absolute fw-bold'>Add To Cart</button>
+                    <a href='gio_hang/xu_ly_them_gio_hang.php?id={$san_pham['MaSanPham']}'><button class='position-absolute fw-bold'>Add To Cart</button></a>
                   </div>";
           }
         ?>         

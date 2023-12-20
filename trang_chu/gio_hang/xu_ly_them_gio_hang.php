@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include '../quan_tri/module/thong_bao.php';
+  include '../../quan_tri/module/thong_bao.php';
   $id = $_GET['id'];
   if(isset($_SESSION['cartItems'])){
     $productIds = $_SESSION['cartItems'];
@@ -17,5 +17,5 @@
     $productIds = array($id);
     $_SESSION['cartItems'] = $productIds;
   } 
-  location("trang_chu.php");
+  location("../trang_chu.php");
 ?>

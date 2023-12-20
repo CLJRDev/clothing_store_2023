@@ -6,3 +6,8 @@ table tbody tr td img{
   height: 80px;
   object-fit: cover;
 }
+.checkout_button{
+  padding: 12px 34px;
+  border: none;
+  border-radius: 25px;
+}

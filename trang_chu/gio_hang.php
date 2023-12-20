@@ -16,9 +16,6 @@
       include 'module/header.php';
     ?>  
   </div>
-  <div class='product_ids' hidden>
-
-  </div>
   <form class='body container-fluid' action='dat_hang.php' method='post'>
     <div class='container-md py-5'>
       <div class='text-center h4 fw-bold mb-4' style='color: #ae1c9a;'>Giỏ Hàng</div>
@@ -61,7 +58,9 @@
                     <div class='ms-4'>{$san_pham['TenSanPham']}</div>
                   </td>
                   <td class='text-center'>"."$"."{$san_pham['GiaKhuyenMai']}</td>
-                  <td class='text-center'><input style='width: 50%;' class='text-center' type='number' name='so_luong_{$id}' min='1' max='{$san_pham['SoLuong']}' required='true'></td>
+                  <td class='text-center'>
+                    <input style='width: 50%;' data-id='{$id}' data-price='{$san_pham['GiaKhuyenMai']}' class='text-center so_luong_input' type='number' name='so_luong_{$id}' min='1' max='{$san_pham['SoLuong']}' value='1' required='true'>
+                  </td>
                   <td class='text-center'>
                     <select name='kich_thuoc_{$id}'>";
                       foreach($kich_thuocs as $kich_thuoc){
@@ -69,33 +68,23 @@
                       }
                 echo "</select>
                   </td>
-                  <td class='text-center'>"."$"."{$san_pham['GiaKhuyenMai']}</td>
-                  <td class='text-center'><button type='button' style='border: none; background-color: transparent;' class='fw-bold'>X</button></td>
+                  <td class='text-center total_price' id='tong_tien_{$id}'>"."$"."{$san_pham['GiaKhuyenMai']}</td>
+                  <td class='text-center'>
+                    <a href='gio_hang/xu_ly_xoa_san_pham.php?id={$id}' class='text-decoration-none text-dark' class='fw-bold'><i class='bx bx-x-circle' style='transform: scale(1.5);'></i></a>
+                  </td>
                 </tr>";
               }
             }              
           ?>         
-          <!-- <tr>
-            <td class='text-center d-flex align-items-center'>
-              <img src='../data/san_pham//494b1022f3fe78b68d3f9e5a2adbff7c.webp'>
-              <div class='ms-4'>Sản phẩm 1</div>
-            </td>
-            <td class='text-center'>1</td>
-            <td class='text-center'><input style='width: 50%; border: none;' class='text-center' type='number' min='1' max='20' required='true'></td>
-            <td class='text-center'>
-              <select name="kich_thuoc">
-                <option value="">S</option>
-                <option value="">M</option>
-                <option value="">L</option>
-              </select>
-            </td>
-            <td class='text-center'>1</td>
-            <td class='text-center'><button type='button' style='border: none; background-color: transparent;' class='fw-bold'>X</button></td>
-          </tr>           -->
         </tbody>
       </table>
       <div class='d-flex justify-content-center'>
-        <button type='submit' style='background-color: #ae1c9a;' class='btn text-white fw-bold px-4'>Đặt Hàng</button>
+        <?php
+          if(isset($_SESSION['cartItems']))
+            echo "<button type='submit' style='background-color: #ae1c9a;' class='checkout_button text-white px-4'></button>";
+          else
+            echo "<button type='button' style='background-color: #ae1c9a;' class='checkout_button text-white px-4'></button>";
+        ?>
       </div>      
     </div>     
   </form>
@@ -105,5 +94,6 @@
     ?>
   </div>  
   <script src='js/danh_muc.js'></script>
+  <script src='js/cart.js'></script>
 </body>
 </html>

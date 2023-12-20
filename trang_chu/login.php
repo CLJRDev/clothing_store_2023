@@ -5,50 +5,22 @@
     include 'module/head.php';
   ?>
   <link rel='stylesheet' href='style/login.css'>
-  <title>Document</title>
+  <title>login</title>
 </head>
-<body>
-  <div class='d-flex align-items-center justify-content-between header px-3'>
-    <?php
-      include 'module/header.php';
-    ?>
-  </div>
-  <section class="login footer-padding">
-    <form method="post" action="xu_ly_dang_nhap.php">
-      <div class="container">
-        <div class="login-section">
-          <div class="review-form">
-          <h5 class="comment-title">ĐĂNG NHẬP</h5>
-          <div class="review-inner-form ">
-          <div class="review-form-name">
-          <label for="TaiKhoan" class="form-label">Tên tài khoản</label>
-          <input type="text" id="TaiKhoan" name="TaiKhoan" class="form-control">
-          </div>
-          <div class="review-form-name">
-          <label for="MatKhau" class="form-label">Mật khẩu</label>
-          <input type="password" id="MatKhau" name="MatKhau" class="form-control">
-          </div>
-          <div class="review-form-name checkbox">
-          <div class="forget-pass">
-          <p style="text-align: center;"><a href="form_cap_mat_khau_moi_qua_email.php" style="color: purple;">Quên mật khẩu?</a></p>
-          </div>
-          </div>
-          </div>
-          <div class="login-btn text-center">
-          <button type="submit" class="shop-btn btn btn-primary">Đăng nhập</button>
-          <span class="shop-account">Chưa có tài khoản ?<a href="tao_tai_khoan.php">Đăng ký ngay!
-          </a></span>
-          </div>
-        </div>
-        </div>
-      </div>
-    </form>
-  </section>
-  <div class='footer'>
-    <?php
-      include 'module/footer.php';
-    ?>
-  </div>
-  <script scr='js/danh_muc.js'></script>
+<body style='background: linear-gradient(90deg,#fbd7e9 0%,#ffd7ab 100%);'>
+  <form class='login_form p-4 bg-white' method="post" action="dang_nhap/xu_ly_dang_nhap.php">
+    <div class='fw-bold fs-3 text-center my-3'>Đăng nhập</div>
+    <label for="TaiKhoan" class="form-label">Tên tài khoản *</label>
+    <input required='true' type="text" id="TaiKhoan" name="TaiKhoan" class="form-control mb-3 input_form">
+    <label for="MatKhau" class="form-label">Mật khẩu *</label>
+    <input required='true' type="password" id="MatKhau" name="MatKhau" class="form-control mb-3 input_form">
+    <a style='color: #ae1c9a;' href='lay_mat_khau.php' class='text-decoration-none'>Quên mật khẩu ?</a>
+    <div class='mt-3'>
+      <button class='text-white login_button'>Đăng Nhập</button>
+    </div>
+    <div class='text-center mt-3'>
+      Chưa có tài khoản ? <a href='dang_ky.php' style='color: #ae1c9a;' class='text-decoration-none'>Đăng ký ngay!</a>
+    </div>
+  </form>
 </body>
 </html>

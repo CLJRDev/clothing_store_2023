@@ -21,8 +21,9 @@
         <thead>
           <tr>
             <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
-            <th style='width: 150px; min-width: 150px;'>Tài khoản</th>
-            <th style='min-width: 200px;'>Địa Chỉ</th>
+            <th style='width: 150px; min-width: 150px;'>Tên người đặt</th>
+            <th style='min-width: 200px;'>Địa chỉ</th>
+            <th class='text-center' style='width: 150px; min-width: 150px;'>Số điện thoại</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Ngày tạo</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Tổng tiền</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Hành Động</th>
@@ -46,6 +47,7 @@
                   <td class='text-center'>{$giohang['MaGioHang']}</td>
                   <td>{$giohang['TaiKhoan']}</td>
                   <td>{$giohang['DiaChi']}</td>
+                  <td class='text-center'>{$giohang['SoDienThoai']}</td>
                   <td class='text-center'>{$giohang['NgayTao']}</td>
                   <td class='text-center'>{$giohang['TongTien']}</td>
                   <td class='text-center d-flex justify-content-around align-items-center'>

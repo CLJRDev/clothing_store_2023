@@ -41,7 +41,7 @@
   //Chuyen SoLuong sang bang sanphamkichthuoc
   $LayMaSanPham = execute_query("SELECT * FROM sanpham WHERE TenSanPham=:TenSanPham AND MaKichThuoc=:MaKichThuoc", array('MaKichThuoc' => $MaKichThuoc, 'TenSanPham' => $TenSanPham))[0];
   $MaSanPham = $LayMaSanPham['MaSanPham']; 
-  $sql = "INSERT sanphamkichthuoc (MaKichThuoc,MaSanPham,SoLuong) VALUES (:MaKichThuoc,:MaSanPham,:SoLuong)";
+  $sql = "INSERT sanphamkichthuoc (MaKichThuoc,MaSanPham,SoLuong,BanDuoc) VALUES (:MaKichThuoc,:MaSanPham,:SoLuong,'0')";
   $params = array();
   $params['MaKichThuoc'] = $MaKichThuoc;
   $params['MaSanPham'] = $MaSanPham;

@@ -36,7 +36,7 @@
               </a>";
           }
         ?>
-        <a class='d-flex align-items-center px-3 py-2 text-decoration-none text-dark border-bottom' href='xu_ly_dang_xuat.php'>
+        <a class='d-flex align-items-center px-3 py-2 text-decoration-none text-dark border-bottom' href='dang_nhap/xu_ly_dang_xuat.php'>
           <i style='color: #ae1c9a; transform: scale(1.5);' class='bx bx-log-out-circle' ></i>
           <div class='ms-4'>Đăng Xuất</div>              
         </a>
@@ -45,19 +45,26 @@
   </button>    
 </div>    
 <div class='search_container d-flex'>
-  <input type="text" name='tu_khoa' class='form-control input_search' placeholder='Nhập từ khóa cần tìm'>
+  <input required='true' type="text" name='tu_khoa' class='form-control input_search' placeholder='Nhập từ khóa cần tìm'>
   <button type='submit' class='px-3 py-2 button_search ms-2'><i class='bx bx-search' ></i></button>
 </div>
 <?php
-  if (isset($_SESSION['QuanTri']) || isset($_SESSION['KhachHang'])) {
-		echo "<div class='d-flex justify-content-center align-items-center'>
-    <a href='gio_hang.php' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
-    <button type='button' class='button_user'><img class='user_img' src='../user_img.png'></button>
-  </div>";
-	}else{
-    echo "<div class='d-flex justify-content-center align-items-center'>
-    <a href='' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
-    <button type='button' class='button_user'><img class='user_img' src='../user_img.png'></button>
-  </div>";
-  }
+  $hinh_anh = execute_query('SELECT HinhAnh FROM nguoidung WHERE TaiKhoan=:tai_khoan', array('tai_khoan' => $_SESSION['TenTaiKhoan']))[0][0];
+?>
+<div class='d-flex justify-content-center align-items-center'>
+  <a href='gio_hang.php' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
+  <button type='button' class='button_user'><img class='user_img' src='../data/nguoi_dung/<?php echo $hinh_anh; ?>'></button>
+</div>
+<?php
+  // if (isset($_SESSION['QuanTri']) || isset($_SESSION['KhachHang'])) {
+	// 	echo "<div class='d-flex justify-content-center align-items-center'>
+  //   <a href='gio_hang.php' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
+  //   <button type='button' class='button_user'><img class='user_img' src='../user_img.png'></button>
+  // </div>";
+	// }else{
+  //   echo "<div class='d-flex justify-content-center align-items-center'>
+  //   <a href='' class='text-decoration-none'><i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i></a>
+  //   <button type='button' class='button_user text-white me-3'><i style='transform: scale(2.0);' class='bx bx-user'></i></button>
+  // </div>";
+  // }
 ?>

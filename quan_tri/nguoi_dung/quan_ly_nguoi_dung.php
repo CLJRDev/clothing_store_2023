@@ -63,10 +63,11 @@
         <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href="them_nguoi_dung.php">Thêm Mới <i class='bx bx-message-square-add'></i></a></button>
         <button class='button_reset text-white py-2 px-3 rounded' type='button'>Reset <i class='bx bx-refresh'></i></i></button>
       </div>
-      <table class='table table-striped border-top mt-2 table-bordered'>
+      <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
             <th style='width: 200px; min-width: 200px;' class='text-center'>Tên tài khoản</th>
+            <th style='width: 150px; min-width: 150px;' class='text-center'>Hình ảnh</th>
             <th style='min-width: 150px;'>Email</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Quyền</th>
             <th style='width: 120px; min-width: 120px;' class='text-center'>Trạng Thái</th>
@@ -109,12 +110,13 @@
               echo "
                 <tr>
                   <td class='text-center'>{$nguoidung['TaiKhoan']}</td>
+                  <td class='text-center'><img src='../../data/nguoi_dung/{$nguoidung['HinhAnh']}' style='width: 100px; height: 100px; object-fit:contain'></td>
                   <td>{$nguoidung['Email']}</td>
                   <td class='text-center'>".($nguoidung['Quyen'] == 1 ? 'Quản trị' : 'Khách hàng')."</td>
                   <td class='text-center'><input onclick='return false;' type='checkbox' ".($nguoidung['TrangThai'] == 1 ? 'checked' : 'unchecked')."></td>
-                  <td class='text-center d-flex justify-content-around align-items-center'>
-                    <a class='text-dark' href='sua_nguoi_dung.php?id={$nguoidung['TaiKhoan']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
-                    <a class='text-dark' href='xu_ly_xoa.php?id={$nguoidung['TaiKhoan']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
+                  <td class='text-center'>
+                    <a class='text-dark me-3' href='sua_nguoi_dung.php?id={$nguoidung['TaiKhoan']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
+                    <a class='text-dark ms-3' href='xu_ly_xoa.php?id={$nguoidung['TaiKhoan']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
                   </td>
                 </tr>
               ";

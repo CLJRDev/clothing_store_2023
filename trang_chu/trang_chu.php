@@ -27,7 +27,7 @@
             $sql = 'SELECT * FROM loaisanpham';
             $loai_san_phams = execute_query($sql);
             foreach($loai_san_phams as $loai_san_pham){
-              echo "<a href='#' class='item text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center'>
+              echo "<a href='xem_theo_loai_san_pham.php?id={$loai_san_pham['MaLoaiSanPham']}' class='item text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center'>
                   <img src='../data/loai_san_pham/{$loai_san_pham['HinhAnh']}'>
                   <div class='mt-3 fw-bold'>{$loai_san_pham['TenLoaiSanPham']}</div>
                 </a>
@@ -45,7 +45,7 @@
             $sql = "SELECT * FROM hangsanxuat";
             $hang_san_xuats = execute_query($sql);
             foreach($hang_san_xuats as $hang_san_xuat){
-              echo "<a class='item text-decoration-none bg-white d-flex justify-content-center align-items-center'>
+              echo "<a href='xem_theo_hang_san_xuat.php?id={$hang_san_xuat['MaHangSanXuat']}' class='item text-decoration-none bg-white d-flex justify-content-center align-items-center'>
                 <img src='../data/hang_san_xuat/{$hang_san_xuat['HinhAnh']}'>
               </a>  
               ";
@@ -59,7 +59,7 @@
         <div class='fw-bold h5'>HÀNG MỚI VỀ</div>
         <div class='item_container'>          
           <?php
-            $sql = "SELECT * FROM sanpham ORDER BY MaSanPham LIMIT 0,8";
+            $sql = "SELECT * FROM sanpham ORDER BY MaSanPham DESC LIMIT 0,8";
             $hang_moi_ves = execute_query($sql);            
             foreach($hang_moi_ves as $hang_moi_ve){
               echo "<div class='item bg-white overflow-hidden position-relative'>
@@ -67,7 +67,7 @@
                       <img class='rating_img ms-4' src='../img/rating.png'>
                       <div class='fw-bold py-1 ms-4'>{$hang_moi_ve['TenSanPham']}</div>
                       <div class='fw-bold ms-4'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$hang_moi_ve['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$hang_moi_ve['GiaKhuyenMai']}</span></div>
-                      <a href='xu_ly_them_gio_hang.php?id={$hang_moi_ve['MaSanPham']}'><button class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
+                      <a href='gio_hang/xu_ly_them_gio_hang.php?id={$hang_moi_ve['MaSanPham']}'><button class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
                     </div>";
             }
           ?>          
@@ -77,7 +77,7 @@
     <div class='flash_sale_section py-5'>
       <div class='flash_sale container-md'>
         <?php
-          include 'flash_sale.php';
+          include 'module/flash_sale.php';
         ?>
         <div class='item_container'>
         <?php
@@ -90,7 +90,7 @@
                     <img class='rating_img ms-4' src='../img/rating.png'>
                     <div class='fw-bold py-1 ms-4'>{$flash_sale['TenSanPham']}</div>
                     <div class='fw-bold ms-4'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$flash_sale['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$flash_sale['GiaKhuyenMai']}</span></div>
-                    <a href='xu_ly_them_gio_hang.php?id={$flash_sale['MaSanPham']}'><button onclick='addToCart({$flash_sale['MaSanPham']})' class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
+                    <a href='gio_hang/xu_ly_them_gio_hang.php?id={$flash_sale['MaSanPham']}'><button class='position-absolute px-4 py-2 fw-bold'>Add To Cart</button></a>
                   </div>";
           }
         ?>
@@ -116,7 +116,7 @@
                         <div class='fw-bold py-1 ms-3'>{$san_pham_ban_chay['TenSanPham']}</div>
                         <div class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_ban_chay['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_ban_chay['GiaKhuyenMai']}</span></div>
                       </div>
-                      <a href='xu_ly_them_gio_hang.php?id={$san_pham_ban_chay['MaSanPham']}'><button onclick='addToCart({$san_pham_ban_chay['MaSanPham']})' class='position-absolute fw-bold'>Add To Cart</button></a>
+                      <a href='gio_hang/xu_ly_them_gio_hang.php?id={$san_pham_ban_chay['MaSanPham']}'><button class='position-absolute fw-bold'>Add To Cart</button></a>
                     </div>";
             }
           ?>
@@ -137,7 +137,7 @@
                     <img class='rating_img ms-3' src='../img/rating.png'>
                     <div style='text-wrap: nowrap; font-size: 14px;' class='fw-bold py-1 ms-3'>{$san_pham_khac['TenSanPham']}</div>
                     <div style='font-size: 14px;' class='fw-bold ms-3'><span class='text-secondary text-decoration-line-through me-2'>"."$"."{$san_pham_khac['GiaGoc']}</span> <span style='color: #ae1c9a;'>"."$"."{$san_pham_khac['GiaKhuyenMai']}</span></div>
-                    <a href='xu_ly_them_gio_hang.php?id={$san_pham_khac['MaSanPham']}'><button onclick='addToCart({$san_pham_khac['MaSanPham']})' class='d-flex align-items-center justify-content-center position-absolute p-2'><i class='bx bx-cart-add fs-5'></i></button></a>
+                    <a href='gio_hang/xu_ly_them_gio_hang.php?id={$san_pham_khac['MaSanPham']}'><button class='d-flex align-items-center justify-content-center position-absolute p-2'><i class='bx bx-cart-add fs-5'></i></button></a>
                   </div>";
           }
         ?>

@@ -40,11 +40,13 @@
     <div class='table_container overflow-auto mt-4'>
       <input type="hidden" name="MaGioHang" id="MaGioHang" value="<?php echo $MaGioHang ?>">
       <div class='title p-3 mb-2 border-bottom fw-bold'>Giỏ Hàng Chờ Phê Duyệt</div>
-      <table class='table table-striped border-top mt-2 table-bordered'>
+      <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
             <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
-            <th style='width: 150px; min-width: 250px;'>Tên sản phẩm</th>
+            <th class='text-center' style='width: 200px; min-width: 200px;'>Hình ảnh</th>
+            <th style='min-width: 250px;'>Tên sản phẩm</th>
+            <th style='width: 150px; min-width: 150px' class='text-center'>Kích thước</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Giá</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Số lượng</th>
             <th style='width: 150px; min-width: 150px;' class='text-center'>Tổng</th>
@@ -53,8 +55,11 @@
         <tbody>
           <?php
             include_once '../module/database.php';
-            $sql = "SELECT * FROM chitietgiohang INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang
-            INNER JOIN sanpham ON sanpham.MaSanPham = chitietgiohang.MaSanPham WHERE chitietgiohang.MaGioHang={$MaGioHang}";
+            $sql = "SELECT MaCTGH,chitietgiohang.MaGioHang,chitietgiohang.MaSanPham,chitietgiohang.SoLuong,chitietgiohang.Gia,sanpham.TenSanPham,sanpham.GiaKhuyenMai,sanpham.MaKichThuoc,kichthuoc.KichThuoc,sanpham.HinhAnh FROM chitietgiohang INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang
+            INNER JOIN sanpham ON sanpham.MaSanPham = chitietgiohang.MaSanPham
+            INNER JOIN kichthuoc ON sanpham.MaKichThuoc = kichthuoc.MaKichThuoc
+            INNER JOIN sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham 
+            WHERE chitietgiohang.MaGioHang={$MaGioHang}";
             $loop = '1';
             $mangtong = array();
             $giohangs = execute_query($sql);
@@ -65,7 +70,9 @@
               echo "
                 <tr>
                   <td class='text-center'>{$giohang['MaGioHang']}</td>
+                  <td class='text-center'><img src='../../data/san_pham/{$giohang['HinhAnh']}' style='width: 100px; height: 100px; object-fit: contain'></td>
                   <td>{$giohang['TenSanPham']}</td>
+                  <td class='text-center'>{$giohang['KichThuoc']}</td>
                   <td class='text-center'>{$giohang['GiaKhuyenMai']}</td>
                   <td class='text-center'>{$giohang['SoLuong']}</td>
                   <td class='text-center'>{$tong}</td>
@@ -76,6 +83,8 @@
             echo "
                 <td></td>
                 <td><div class='title fw-bold text-primary text-center'>*Tổng tiền giỏ hàng:</div></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td><div class='title fw-bold text-primary text-center'>$tonggiohang</div></td>";

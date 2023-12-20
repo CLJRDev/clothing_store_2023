@@ -115,17 +115,16 @@
         <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href="them_san_pham.php">Thêm Mới <i class='bx bx-message-square-add'></i></a></button>
         <button class='button_reset text-white py-2 px-3 rounded' type='button'>Reset <i class='bx bx-refresh'></i></i></button>
       </div>
-      <table class='table table-striped border-top mt-2 table-bordered'>
+      <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
             <th style='width: 50px; min-width: 50px;' class='text-center'><i style='transform: scale(1.6);' class='bx bx-key'></i></th>
             <th style='min-width: 250px;' class='text-center'>Tên sản phẩm</th>
+            <th style='min-width: 100px; width: 100px;' class='text-center'>Hình ảnh</th>
             <th style='min-width: 120px; width: 60px;' class='text-center'>Số lượng</th>
             <th style='width: 60px; min-width: 120px;' class='text-center'>Giá gốc</th>
             <th style='width: 60px; min-width: 150px;' class='text-center'>Giá khuyến mãi</th>
-            <th style='width: 80px; min-width: 120px;' class='text-center'>Giới tính</th>
             <th style='width: 80px; min-width: 120px;' class='text-center'>Kích thước</th>
-            <th style='width: 80px; min-width: 150px;' class='text-center'>Loại sản phẩm</th>
             <th style='width: 80px; min-width: 150px;' class='text-center'>Hãng sản xuất</th>
             <th style='width: 100px; min-width: 120px;' class='text-center'>Trạng Thái</th>
             <th style='width: 120px; min-width: 120px;' class='text-center'>Hành Động</th>
@@ -136,17 +135,19 @@
             $sql = "SELECT
                       sanpham.MaSanPham,
                       sanpham.TenSanPham,
-                      sanphamkichthuoc.SoLuong,
                       sanpham.HinhAnh,
                       sanpham.GiaGoc,
                       sanpham.GiaKhuyenMai,
                       sanpham.MoTa,
                       sanpham.GioiTinh,
-                      kichthuoc.KichThuoc,
                       sanpham.MaKichThuoc,
+                      sanpham.MaLoaiSanPham,
+                      sanpham.MaHangSanXuat,
+                      sanpham.TrangThai,
+                      sanphamkichthuoc.SoLuong,
+                      kichthuoc.KichThuoc,
                       loaisanpham.TenLoaiSanPham,
-                      hangsanxuat.TenHangSanXuat,
-                      sanpham.TrangThai
+                      hangsanxuat.TenHangSanXuat 
                     FROM
                         sanpham
                     INNER JOIN
@@ -156,7 +157,7 @@
                     INNER JOIN
                         hangsanxuat ON sanpham.MaHangSanXuat = hangsanxuat.MaHangSanXuat
                     INNER JOIN
-                        sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham
+                        sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham AND sanpham.MaKichThuoc = sanphamkichthuoc.MaKichThuoc 
                     WHERE 1=1";
             $params = array();
             if(isset($_SESSION['tu_khoa_san_pham']))
@@ -211,17 +212,17 @@
                 <tr>
                   <td class='text-center'>{$sanpham['MaSanPham']}</td>
                   <td>{$sanpham['TenSanPham']}</td>
+                  <td><img src='../../data/san_pham/{$sanpham['HinhAnh']}' style='width: 100px; height: 100px; object-fit: contain'></td>
                   <td class='text-center'>{$sanpham['SoLuong']}</td>
-                  <td>{$sanpham['GiaGoc']}</td>
-                  <td>{$sanpham['GiaKhuyenMai']}</td>
-                  <td class='text-center'>{$sanpham['GioiTinh']}</td>
+                  <td class='text-center'>{$sanpham['GiaGoc']}</td>
+                  <td class='text-center'>{$sanpham['GiaKhuyenMai']}</td>
                   <td class='text-center'>{$sanpham['KichThuoc']}</td>
-                  <td>{$sanpham['TenLoaiSanPham']}</td>
-                  <td>{$sanpham['TenHangSanXuat']}</td>
+                  <td class='text-center'>{$sanpham['TenHangSanXuat']}</td>
                   <td class='text-center'><input onclick='return false;' type='checkbox' ".($sanpham['TrangThai'] == 1 ? 'checked' : 'unchecked')."></td>
-                  <td class='text-center d-flex justify-content-around align-items-center'>
-                    <a class='text-dark' href='sua_san_pham.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
-                    <a class='text-dark' href='xu_ly_xoa.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
+                  <td class='text-center'>
+                    <a class='text-dark me-2' href='xem_chi_tiet.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i class='bx bx-detail' style='transform: scale(1.5);'></i></a>
+                    <a class='text-dark ms-1 me-1' href='sua_san_pham.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i class='bx bx-pencil' style='transform: scale(1.5);'></i></a>
+                    <a class='text-dark ms-2' href='xu_ly_xoa.php?sanphamid={$sanpham['MaSanPham']}&kichthuocid={$sanpham['MaKichThuoc']}'><i style='transform: scale(1.5);' class='bx bx-message-alt-x'></i></a>
                   </td>
                 </tr>
               ";

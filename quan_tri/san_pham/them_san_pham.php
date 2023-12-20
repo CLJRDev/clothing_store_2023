@@ -37,10 +37,6 @@
           <input type="number" name='GiaKhuyenMai' class="form-control" id="GiaKhuyenMai" required="true">
         </div>
         <div class='col-md-6 pb-3'>
-          <div class='mb-1'>Mô tả sản phẩm</div>
-          <input type="text" name='MoTa' class="form-control" id="MoTa" required="true">
-        </div>
-        <div class='col-md-6 pb-3'>
           <div class='mb-1'>Kích thước</div>
           <select name="KichThuoc" class="form-select" id="inputGroupSelect01 KichThuoc">
             <?php
@@ -91,6 +87,10 @@
             <option value="1">Kích hoạt</option>
             <option value="0">Khóa</option>
           </select> 
+        </div>
+        <div class='col-md-12 pb-3'>
+          <div class='mb-1'>Mô tả sản phẩm</div>
+          <textarea type="text" name='MoTa' rows="4" class="form-control" id="MoTa" required="true"></textarea>
         </div>       
       </div>  
       <div class='action_container pb-3 ps-3'>
