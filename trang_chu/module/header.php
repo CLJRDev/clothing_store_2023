@@ -1,5 +1,5 @@
 <div class='d-flex'>
-  <img class='logo' src="../logo2.avif">
+  <img class='logo' src="../img/logo2.avif">
   <button type='button' class='d-flex align-items-center ms-4 category_button'>
     <div class='d-flex align-items-center category_icon_container p-2'><i class='bx bx-menu text-white fs-4 category_icon'></i></div>      
     <div class='fs-6 text-white ps-2'>Danh mục
