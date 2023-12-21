@@ -39,7 +39,7 @@
   <form class='body' action='phe_duyet_gio_hang.php' method='get'>  
     <div class='table_container overflow-auto mt-4'>
       <input type="hidden" name="MaGioHang" id="MaGioHang" value="<?php echo $MaGioHang ?>">
-      <div class='title p-3 mb-2 border-bottom fw-bold'>Giỏ Hàng Chờ Phê Duyệt</div>
+      <div class='title p-3 mb-2 border-bottom fw-bold'>Chi Tiết Giỏ Hàng</div>
       <table class='table table-striped border-top mt-2 table-bordered align-middle'>
         <thead>
           <tr>
@@ -55,7 +55,7 @@
         <tbody>
           <?php
             include_once '../module/database.php';
-            $sql = "SELECT MaCTGH,chitietgiohang.MaGioHang,chitietgiohang.MaSanPham,chitietgiohang.SoLuong,chitietgiohang.Gia,sanpham.TenSanPham,sanpham.GiaKhuyenMai,sanpham.MaKichThuoc,kichthuoc.KichThuoc,sanpham.HinhAnh FROM chitietgiohang INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang
+            $sql = "SELECT MaCTGH, chitietgiohang.MaGioHang, chitietgiohang.MaSanPham, chitietgiohang.SoLuong, chitietgiohang.Gia, sanpham.TenSanPham, sanpham.GiaKhuyenMai, sanpham.MaKichThuoc, kichthuoc.KichThuoc, sanpham.HinhAnh, giohang.TrangThai FROM chitietgiohang INNER JOIN giohang ON giohang.MaGioHang = chitietgiohang.MaGioHang
             INNER JOIN sanpham ON sanpham.MaSanPham = chitietgiohang.MaSanPham
             INNER JOIN kichthuoc ON sanpham.MaKichThuoc = kichthuoc.MaKichThuoc
             INNER JOIN sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham 
@@ -93,9 +93,18 @@
       </table>
       <div class='action_container ps-3 pb-3'>
         <?php
-          echo "<button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='phe_duyet_gio_hang.php?id={$giohang['MaGioHang']}'>Duyệt giỏ hàng <i class='bx bx-list-check'></i></a></button>";
+          if($giohang['TrangThai'] == 0){
+            echo "<button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='phe_duyet_gio_hang.php?id={$giohang['MaGioHang']}'>Duyệt giỏ hàng <i class='bx bx-list-check'></i></a></button>";
+          }
         ?>
-        <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='quan_ly_gio_hang.php'>Quay lại <i class='bx bx-arrow-back'></i></a></button>
+        <?php
+          if($giohang['TrangThai'] == 0){
+            echo "<button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='quan_ly_gio_hang.php'>Quay lại <i class='bx bx-arrow-back'></i></a></button>";
+          }
+          if($giohang['TrangThai'] == 1){
+            echo "<button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='danh_sach_gio_hang_da_duyet.php'>Quay lại <i class='bx bx-arrow-back'></i></a></button>";
+          }
+        ?>
       </div>
     </div>
   </form>

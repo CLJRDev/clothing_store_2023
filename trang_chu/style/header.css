@@ -48,6 +48,7 @@
   object-fit: cover;
   width: 50px;
   border-radius: 50%;
+  height: 50px;
 }
 .header .cart_container .notification_number{
   left: 45%;

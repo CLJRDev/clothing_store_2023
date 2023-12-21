@@ -62,7 +62,7 @@
     ?>
     <i style='transform: scale(2.0);' class='bx bx-cart text-white mx-5'></i>
   </a>
-  <button type='button' class='button_user'><img class='user_img' src='../data/nguoi_dung/<?php echo $hinh_anh; ?>'></button>
+  <a href="trang_ca_nhan.php"><button type='button' class='button_user'><img class='user_img' src='../data/nguoi_dung/<?php echo $hinh_anh; ?>'></button></a>
 </div>
 <?php
   // if (isset($_SESSION['QuanTri']) || isset($_SESSION['KhachHang'])) {

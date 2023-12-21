@@ -11,11 +11,11 @@
   <link rel='stylesheet' href='style/cart.css'>
 </head>
 <body>
-  <div class='d-flex align-items-center justify-content-between header px-3'>
+  <form action='xu_ly_tim_kiem.php' method='post' class='d-flex align-items-center justify-content-between header px-3'>
     <?php
       include 'module/header.php';
-    ?>  
-  </div>
+    ?>
+  </form>
   <form class='body container-fluid' action='dat_hang.php' method='post'>
     <div class='container-md py-5'>
       <div class='text-center h4 fw-bold mb-4' style='color: #ae1c9a;'>Giỏ Hàng</div>

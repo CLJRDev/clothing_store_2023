@@ -17,6 +17,9 @@
   <form class='body' method='post' enctype='multipart/form-data'>  
     <div class='table_container overflow-auto mt-4'>
       <div class='title p-3 mb-2 border-bottom fw-bold'>Danh Sách Giỏ Hàng Cần Phê Duyệt</div>
+      <div class='action_container ps-3 pb-3'>
+        <button class='button_add text-white py-2 px-3 rounded' type='button'><a class='text-decoration-none text-white' href='danh_sach_gio_hang_da_duyet.php'>Giỏ hàng đã duyệt <i class='bx bx-list-check'></i></a></button>
+      </div>
       <table class='table table-striped border-top mt-2 table-bordered'>
         <thead>
           <tr>

@@ -59,7 +59,7 @@
         <div class='fw-bold h5'>HÀNG MỚI VỀ</div>
         <div class='item_container'>          
           <?php
-            $sql = "SELECT * FROM sanpham ORDER BY MaSanPham DESC LIMIT 0,8";
+            $sql = "SELECT * FROM sanpham INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham WHERE sanphamkichthuoc.SoLuong > 0 ORDER BY sanpham.MaSanPham DESC LIMIT 8";
             $hang_moi_ves = execute_query($sql);            
             foreach($hang_moi_ves as $hang_moi_ve){
               echo "<div class='item bg-white overflow-hidden position-relative'>
@@ -81,7 +81,8 @@
         ?>
         <div class='item_container'>
         <?php
-          $sql = "SELECT * FROM sanpham ORDER BY (GiaGoc - GiaKhuyenMai) DESC LIMIT 4";
+          $sql = "SELECT * FROM sanpham INNER JOIN sanphamkichthuoc ON sanphamkichthuoc.MaSanPham = sanpham.MaSanPham WHERE sanphamkichthuoc.SoLuong > 0 
+                  ORDER BY (GiaGoc - GiaKhuyenMai) DESC LIMIT 4";
           $flash_sales = execute_query($sql);
           foreach($flash_sales as $flash_sale){
             echo "<div class='item bg-white overflow-hidden position-relative'>
@@ -102,10 +103,9 @@
         <div class='fw-bold h5'>Sản Phẩm Bán Chạy</div>
         <div class='item_container mt-3'>
           <?php
-            $sql = "SELECT * FROM sanpham 
-                    INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham
-                    INNER JOIN kichthuoc ON kichthuoc.MaKichThuoc = sanpham.MaKichThuoc AND kichthuoc.MaKichThuoc = sanphamkichthuoc.MaKichThuoc
-                    ORDER BY SoLuong ASC LIMIT 6";
+            $sql = "SELECT * FROM sanpham INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham 
+            INNER JOIN kichthuoc ON kichthuoc.MaKichThuoc = sanpham.MaKichThuoc 
+            AND kichthuoc.MaKichThuoc = sanphamkichthuoc.MaKichThuoc WHERE sanphamkichthuoc.SoLuong >0 ORDER BY SoLuong ASC LIMIT 6";
             $san_pham_ban_chays = execute_query($sql);
             foreach($san_pham_ban_chays as $san_pham_ban_chay){
               echo "<div class='item bg-white d-flex position-relative p-3'>
@@ -128,7 +128,7 @@
         <div class='fw-bold h5'>Sản Phẩm Khác</div>
         <div class='item_container mt-3'>
         <?php
-          $sql = "SELECT * FROM sanpham ORDER BY MaSanPham LIMIT 12";
+          $sql = "SELECT * FROM sanpham INNER JOIN sanphamkichthuoc ON sanpham.MaSanPham = sanphamkichthuoc.MaSanPham WHERE sanphamkichthuoc.SoLuong > 0 ORDER BY sanpham.MaSanPham DESC LIMIT 12";
           $san_pham_khacs = execute_query($sql);            
           foreach($san_pham_khacs as $san_pham_khac){
             echo "<div class='item bg-white overflow-hidden position-relative '>

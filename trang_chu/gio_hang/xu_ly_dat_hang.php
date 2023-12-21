@@ -12,9 +12,10 @@
     array_push($kich_thuocs, $_POST['kich_thuoc_'.$value]);
   }
   //Thêm giỏ hàng
-  $sql = "INSERT giohang (TaiKhoan,DiaChi,SoDienThoai,NgayTao,TongTien,TrangThai) VALUES(:tai_khoan, :dia_chi, :so_dien_thoai, NOW(), :tong_tien, :trang_thai)";
+  $sql = "INSERT giohang (TaiKhoan,NguoiTao,DiaChi,SoDienThoai,NgayTao,TongTien,TrangThai) VALUES(:tai_khoan, :nguoi_tao, :dia_chi, :so_dien_thoai, NOW(), :tong_tien, :trang_thai)";
   $params = array();
   $params['tai_khoan'] = $_POST['ten_nguoi_dat'];
+  $params['nguoi_tao'] = $_SESSION['TenTaiKhoan'];
   $dia_chi = $_POST['dia_chi'] . ", " . $_POST['thanh_pho_quan_huyen'] . ", " . $_POST['tinh_thanh_pho'];
   $params['so_dien_thoai'] = $_POST['so_dien_thoai'];
   $params['dia_chi'] = $dia_chi;
